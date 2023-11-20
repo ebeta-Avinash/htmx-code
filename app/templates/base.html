@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your App Title{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="font-sans bg-gray-100 task-body" id="task-list">
+    <header class="bg-blue-500 p-4 text-white">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-semibold">Task App</h1>
+        </div>
+    </header>
+
+    <div class="container mx-auto mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script>
+      document.body.addEventListener("htmx:configRequest", (e) => {
+        e.detail.headers["X-CSRFToken"] = "{{ csrf_token }}";
+      });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
